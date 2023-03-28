@@ -1,0 +1,229 @@
+﻿Test-Case 1:
+
+
+x:
+ft2582@csee4119-instance-1:~$ python3 chatapp.py -c x localhost 4000 13100
+>>>Successfully connect to server
+['Welcome, You are registed!']
+>>>[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5000], 'port': 5000, 'status': 'Yes'}]
+>>> Client table updated.
+>>>message sent
+z:  hello! 
+send y hello
+>>>message sent
+>>>Message received by y
+>>>deregister x
+>>>message sent
+>>>['Your are Offline. Bye!']
+
+
+Chat y-> x
+send x nihao
+>>>message sent
+>>>message sent
+>>>No ACK from x, message not delivered
+>>>[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}]
+>>> Client table updated.
+
+
+
+
+Test Case 2:
+
+
+Y:
+>>>Successfully connect to server
+>>>['Welcome, You are registed!']
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}]
+>>> Client table updated.
+deregister y
+>>>message sent
+>>>['Your are Offline. Bye!']
+
+
+
+
+X:
+>>>message sent
+>>>message sent
+>>>No ACK from y, message not delivered
+>>>
+
+
+Test Case 3:
+
+
+Server:
+Server is running on 4000
+the client address is ('127.0.0.1', 13100)
+The header is: register
+>>> 
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes'}]
+the client address is ('127.0.0.1', 3100)
+The header is: register
+>>> 
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ('127.0.0.1', 3100), 'port': 3100, 'status': 'Yes'}]
+the client address is ('127.0.0.1', 5100)
+The header is: register
+>>> 
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ('127.0.0.1', 3100), 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ('127.0.0.1', 5100), 'port': 5100, 'status': 'Yes'}]
+the client address is ('127.0.0.1', 2100)
+The header is: register
+>>> 
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ('127.0.0.1', 3100), 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ('127.0.0.1', 5100), 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ('127.0.0.1', 2100), 'port': 2100, 'status': 'Yes'}]
+the client address is ('127.0.0.1', 13100)
+The header is: create_group
+>>> csee4119
+Client x created group csee4119 sucessfully
+the client address is ('127.0.0.1', 3100)
+The header is: join_group
+>>> csee4119
+Client y joined group csee4119
+the client address is ('127.0.0.1', 5100)
+The header is: join_group
+>>> csee4119
+Client z joined group csee4119
+the client address is ('127.0.0.1', 13100)
+The header is: join_group
+>>> csee4119
+Client x joined group csee4119
+the client address is ('127.0.0.1', 13100)
+The header is: send_group
+>>> csee4119
+Client x sent group message:  hello everyone!  
+>>>y not responsive, removed from group csee4119
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes', 'csee4119': 'Yes'}, {'name': 'y', 'address': ('127.0.0.1', 3100), 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ('127.0.0.1', 5100), 'port': 5100, 'status': 'Yes', 'csee4119': 'Yes'}, {'name': 'a', 'address': ('127.0.0.1', 2100), 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+>>>z not responsive, removed from group csee4119
+[{'name': 'x', 'address': ('127.0.0.1', 13100), 'port': 13100, 'status': 'Yes', 'csee4119': 'Yes'}, {'name': 'y', 'address': ('127.0.0.1', 3100), 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ('127.0.0.1', 5100), 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ('127.0.0.1', 2100), 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+the client address is ('127.0.0.1', 3100)
+The header is: groupMessageReceived
+>>> 
+the client address is ('127.0.0.1', 5100)
+The header is: groupMessageReceived
+>>> 
+the client address is ('127.0.0.1', 5100)
+The header is: list_members
+>>> csee4119
+>>> {group_name} [Members in the group {group_name}:] 
+>>> (csee4119) x
+
+
+X:
+>>>Successfully connect to server
+['Welcome, You are registed!']
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}]
+>>> Client table updated.
+>>>[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+create_group csee4119
+>>>message sent
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+>>> Client table updated.
+>>>Group csee4119 created by server
+>>>join_group csee4119
+>>>message sent
+>>>Entered group sucessfully
+>>> (csee4119) send_group hello everyone!
+>>>message sent
+>>>Message received by Server
+>>> (csee4119) 
+
+
+
+
+Y:
+>>>Successfully connect to server
+['Welcome, You are registed!']
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}]
+>>> Client table updated.
+>>>[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+>>> Client table updated.
+join_group csee4119
+>>>message sent
+>>>Entered group sucessfully
+>>> (csee4119) >>> csee4119 Group_Message x: hello everyone!
+>>>message sent
+
+
+
+
+Z:
+
+
+>>>Successfully connect to server
+>>>['Welcome, You are registed!']
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+>>> Client table updated.
+join_group csee4119
+>>>message sent
+>>>Entered group sucessfully
+>>> (csee4119) >>> csee4119 Group_Message x: hello everyone!
+>>>message sent
+>>>message sent
+leave_group
+>>>message sent
+(csee4119) x
+>>> Leave group chat csee4119
+a:  hello z! 
+>>>
+
+
+
+
+A:
+
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+(base) Foriss-MBP:pa 1 sharhy$ python3 chatapp.py -c a localhost 4000 2100
+>>>Successfully connect to server
+['Welcome, You are registed!']
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+>>>[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes'}]
+>>> Client table updated.
+[{'name': 'x', 'address': ['127.0.0.1', 13100], 'port': 13100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'y', 'address': ['127.0.0.1', 3100], 'port': 3100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'z', 'address': ['127.0.0.1', 5100], 'port': 5100, 'status': 'Yes', 'csee4119': 'No'}, {'name': 'a', 'address': ['127.0.0.1', 2100], 'port': 2100, 'status': 'Yes', 'csee4119': 'No'}]
+>>> Client table updated.
+send z  hello z!
+>>>message sent
+>>>Message received by z
+>>>
